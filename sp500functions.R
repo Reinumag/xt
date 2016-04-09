@@ -16,6 +16,20 @@ instrumentRtn <- function(instrument, startDate, lag){
   return(monthlyReturn)
 }
 
+
+# returns instrument prices
+instrumentPrice <- function(instrument, startDate){
+  
+  # tseries financial data fetching function, default data provider Yahoo
+  price         <- get.hist.quote(instrument, 
+                                  quote="Adj", 
+                                  start = startDate, 
+                                  retclass = "zoo", 
+                                  quiet = TRUE
+  )
+  return(price)
+}
+
 # finds the position of date in sequence of dates
 findDateValue <- function(x, theDate){
   pos <- match(as.yearmon(theDate), index(x))
